@@ -1,12 +1,12 @@
-Customer Segmentation & Anomaly Detection Report
+**Customer Segmentation & Anomaly Detection Report**
 
-Prepared by: Mohamed
+**Prepared by:** IKililou Akandji
 
-Project Type: Unsupervised Customer Segmentation, Cluster Interpretation, and Outlier Detection
+**Project Type:** Unsupervised Customer Segmentation, Cluster Interpretation, and Outlier Detection
 
 Tools & Libraries: Python, Pandas, Scikit-Learn, Plotly, Matplotlib, Seaborn, Streamlit
 
-1. Project Overview
+**1. Project Overview**
 The goal was to segment UK-based customers of an online retail company to:
 Identify distinct purchasing patterns for targeted marketing.
 
@@ -16,7 +16,7 @@ Detect anomalous transactions that may represent fraud or data errors.
 
 A full interactive Streamlit dashboard was built so stakeholders can upload raw Excel data, run segmentation, and visualize the results.
 
-2. Data Pipeline
+**2. Data Pipeline**
 Input: online_retail.xlsx
 Data Cleaning (data_utils.py):
 Removed cancellations (InvoiceNo starting with “C”).
@@ -27,6 +27,8 @@ Calculated TotalCost = Quantity × UnitPrice.
 
 Removed extreme outliers (TotalCost ≤ £500, Quantity ≤ 100), leaving us with 98% of UK customers.
 
+![Cleaned_data.png](../images/Cleaned_data.png)
+
 RFM Table Creation:
 Recency – Days since the customer’s last purchase.
 
@@ -34,9 +36,11 @@ Frequency – Number of unique invoices per customer.
 
 Monetary – Total spend in GBP per customer.
 
+![RFM table.png](../images/RFM%20table.png)
+
 The resulting RFM dataset contains one row per customer, forming the basis for clustering.
 
-3. Clustering Analysis (rfm_analysis.py)
+**3. Clustering Analysis (rfm_analysis.py)**
 Methodology
 Features standardized using StandardScaler.
 
@@ -53,7 +57,7 @@ PCA (2 components) clearly separated three groups.
 
 Cluster IDs (labels_) served as pseudo-labels for supervised interpretation.
 
-4. Cluster Interpretation (tree_models.py)
+**4. Cluster Interpretation (tree_models.py)**
 A Random Forest Classifier achieved strong predictive accuracy on the pseudo-labels.
 
 Feature importance scores:
@@ -69,26 +73,25 @@ Recency ≈ 0.15 – Tertiary driver
 This shows that how often customers buy is the strongest signal when distinguishing clusters. 
 Spending level is next most important, while time since last purchase has the least influence.
 
-
 | Cluster    | Recency (days)     | Frequency          | Monetary         | Customer Type
 |:-----------|:-------------------|:-------------------|------------------|-----------------------------------------|
 | 0          | Low                | High               | High             | “Champions” – loyal, frequent, high-spend customers
 | 1          | High               | Low                | Low              | “At Risk” – long time since last purchase
 | 2          | Medium             | Medium             | Medium           | “Regulars” – steady customers
 
-
-5. Anomaly Detection (anomaly.py)
+**5. Anomaly Detection (anomaly.py)**
 Isolation Forest (2 % contamination) flagged unusual RFM profiles.
 
-Outliers visualized on a Recency–Monetary scatter plot include:
+Outliers visualized on a frequency_monetary scatter plot include:
+![frequency_monetary.png](../images/frequency_monetary.png)
 
-High-spend but very infrequent buyers
+Outliers visualized on a recency–Monetary scatter plot include:
+![Recency_monetary.png](../images/Recency_monetary.png)
 
-Extremely frequent but low-spend accounts
+Outliers visualized on a recency–frequency scatter plot include:
+![recency_frequency.png](../images/recency_frequency.png)
 
-These may represent data-entry errors, bulk one-off purchases, or potential fraud.
-
-6. Business Insights & Recommendations
+**6. Business Insights & Recommendations**
 6.1 Targeted Marketing
 
 | Segment     | Opportunity                            | Suggested Action                                           |
@@ -105,7 +108,7 @@ Clusters guide demand forecasting—Champions inform stock prioritization for hi
 Review Isolation-Forest outliers: validate billing/shipping details and flag extreme transactions for manual checks.
 
 
-7. Deliverables
+7. **Deliverables**
 Modular Python package:
 
 data_utils.py – Data cleaning & RFM creation
@@ -122,7 +125,7 @@ Interactive Dashboard Workflow:
 Upload Excel → View Cleaned Data → RFM Table → Optimal Cluster Charts → Feature Importance → Anomaly Scatter Plots.
 
 
-Executive Summary
-Through RFM segmentation and machine learning we uncovered three clear customer segments and identified outlier behaviors.
+**Executive Summary:**
+Through RFM segmentation and machine learning, I uncovered three clear customer segments and identified outlier behaviors.
 Purchase Frequency emerged as the strongest determinant of customer value, followed by total spend (Monetary), with Recency playing a smaller but still meaningful role.
 To increase revenue and retention, the company should prioritize strategies that drive repeat purchases—loyalty programs, personalized recommendations, and subscription offerings—while also leveraging Monetary and Recency cues for refined marketing and risk management.
