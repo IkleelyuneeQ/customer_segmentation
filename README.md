@@ -2,9 +2,6 @@ README
 
 Customer Segmentation & Anomaly Detection Report
 
-
-Live Demo – http://172.20.10.2:8501/
-
 Project Overview – 
 The goal was to segment UK-based customers of an online retail company to:
     Identify distinct purchasing patterns for targeted marketing.
