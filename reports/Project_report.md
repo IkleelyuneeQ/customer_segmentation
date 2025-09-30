@@ -1,7 +1,5 @@
 **Customer Segmentation & Anomaly Detection Report**
 
-**Prepared by:** IKililou Akandji
-
 **Project Type:** Unsupervised Customer Segmentation, Cluster Interpretation, and Outlier Detection
 
 Tools & Libraries: Python, Pandas, Scikit-Learn, Plotly, Matplotlib, Seaborn, Streamlit
